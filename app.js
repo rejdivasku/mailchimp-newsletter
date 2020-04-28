@@ -43,12 +43,21 @@ app.post("/", function(req, res){
 
   request(options, function(error, response, body){
     if(error) {
-      console.log(error);
+      res.sendFile(__dirname + "/failure.html");
     }else{
-      console.log(response.statusCode);
+      if (response.statuscode === 200){
+        res.sendFile(__dirname + "/failure.html");
+      }else{
+        res.sendFile(__dirname + "/failure.html");
+      }
     }
   });
 });
+
+app.post("/failure", function(req, res){
+  res.redirect("/");
+});
+
 
 
 app.listen(process.env.PORT || 3000, function(){
